@@ -5,8 +5,9 @@ A RESTful API for managing lost and found items. This backend service allows use
 
 ## 🌐 Live Demo
 
-**Live URL:** [coming soon]
-**GitHub Repository:** [lost_found_api](https://github.com/shashix07/lost_found_api)
+**Live URL:** [here](https://lost-found-api-o9gy.onrender.com)<br>
+**GitHub Repository:** [lost_found_api](https://github.com/shashix07/lost_found_api)<br>
+**Download Postman File**[Download](https://github.com/shashiX07/lost_found_api/releases/download/postman/backend.json)<br>
 
 ## 📋 Features
 
@@ -261,28 +262,6 @@ The API implements rate limiting:
 - **Limit:** 10 requests per minute per IP
 - **Window:** 1 minute
 - **Response:** 429 status code when exceeded
-
-## 🚀 Deployment
-
-This project is configured to deploy on Replit:
-
-1. **Fork this Repl** on Replit
-2. **Set up environment variables** in the Secrets tab
-3. **Configure your database** connection
-4. **Click the Run button** to start the server
-5. **Deploy** using Replit's deployment feature
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the ISC License. See the LICENSE file for details.
 
 ## 🆘 Support
 
