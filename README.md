@@ -262,28 +262,6 @@ The API implements rate limiting:
 - **Window:** 1 minute
 - **Response:** 429 status code when exceeded
 
-## 🚀 Deployment
-
-This project is configured to deploy on Replit:
-
-1. **Fork this Repl** on Replit
-2. **Set up environment variables** in the Secrets tab
-3. **Configure your database** connection
-4. **Click the Run button** to start the server
-5. **Deploy** using Replit's deployment feature
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the ISC License. See the LICENSE file for details.
-
 ## 🆘 Support
 
 If you encounter any issues or have questions:
