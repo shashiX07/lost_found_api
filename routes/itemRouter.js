@@ -34,7 +34,7 @@ itemRouter.get("/:id", async (req, res) => {
 });
 
 //adding a new item
-itemRouter.post("/",requireAuth,async (req, res) => {
+itemRouter.post("/",requireAuth, async (req, res) => {
     const newItem = req.body;
     if(!newItem.title || !newItem.category || !newItem.description || !newItem.status || !newItem.location || !newItem.date || !newItem.contact_info) {
         return res.status(400).json({ message: "All fields are required" });
@@ -50,12 +50,13 @@ itemRouter.post("/",requireAuth,async (req, res) => {
 });
 
 //updating an existing item
-itemRouter.put("/:id", requireUserOrAdmin, async (req, res) => {
+itemRouter.put("/:id",requireAuth, requireUserOrAdmin, async (req, res) => {
     const id = req.params.id;
     const updatedItem = req.body;
     if(!updatedItem.title || !updatedItem.category || !updatedItem.description || !updatedItem.status || !updatedItem.location || !updatedItem.date || !updatedItem.contact_info) {
         return res.status(400).json({ message: "All fields are required" });
     }
+    updatedItem.image_url = updatedItem.image_url || "https://media.istockphoto.com/id/1271880340/vector/lost-items-line-vector-icon-unidentified-items-outline-isolated-icon.jpg?s=612x612&w=0&k=20&c=d2kHGEmowThp_UrqIPfhxibstH6Sq5yDZJ41NetzVaA=";
     const result = await UpdateItem(id, updatedItem);
     if (result) {
         res.status(200).json({ message: "Item updated successfully", item: result });
@@ -65,7 +66,7 @@ itemRouter.put("/:id", requireUserOrAdmin, async (req, res) => {
 });
 
 //deleting an item
-itemRouter.delete("/:id", requireAdmin, async (req, res) => {
+itemRouter.delete("/:id", requireAuth, requireAdmin, async (req, res) => {
     const id = req.params.id;
     const result = await deleteItem(id);
     if (result) {

@@ -14,7 +14,6 @@ let adminToken;
 let createdItemId;
 
 describe('Lost & Found API', () => {
-  // Signup a user
   it('should signup a user', async () => {
     const res = await request(app)
       .post('/auth/u/signup')
@@ -23,11 +22,12 @@ describe('Lost & Found API', () => {
         email: 'testuser@example.com',
         password: 'testpassword'
       });
-    expect(res.statusCode).toBe(201);
-    expect(res.body.user).toBeDefined();
+    expect([201,400]).toContain(res.statusCode); // 400 if already exists
+    if (res.statusCode === 201) {
+      expect(res.body.user).toBeDefined();
+    }
   });
 
-  // Login as user
   it('should login as user', async () => {
     const res = await request(app)
       .post('/auth/u/login')
@@ -40,7 +40,6 @@ describe('Lost & Found API', () => {
     userToken = res.body.token;
   });
 
-  // Login as admin
   it('should login as admin', async () => {
     const res = await request(app)
       .post('/auth/admin')
@@ -53,7 +52,6 @@ describe('Lost & Found API', () => {
     adminToken = res.body.token;
   });
 
-  // Add an item
   it('should add an item', async () => {
     const res = await request(app)
       .post('/items')
@@ -69,23 +67,26 @@ describe('Lost & Found API', () => {
       });
     expect(res.statusCode).toBe(201);
     expect(res.body.item).toBeDefined();
-    createdItemId = res.body.item.id || 1;
+    createdItemId = res.body.item.id;
+    expect(typeof createdItemId).toBe('number');
   });
 
-  // Get all items
   it('should get all items', async () => {
     const res = await request(app).get('/items');
     expect([200,404]).toContain(res.statusCode);
-    expect(Array.isArray(res.body) || res.body.message).toBeTruthy();
+    if (res.statusCode === 200) {
+      expect(Array.isArray(res.body)).toBe(true);
+    }
   });
 
-  // Get item by ID
   it('should get item by ID', async () => {
     const res = await request(app).get(`/items/${createdItemId}`);
     expect([200,404]).toContain(res.statusCode);
+    if (res.statusCode === 200) {
+      expect(res.body.id).toBe(createdItemId);
+    }
   });
 
-  // Update item (by user)
   it('should update item as owner', async () => {
     const res = await request(app)
       .put(`/items/${createdItemId}`)
@@ -102,7 +103,6 @@ describe('Lost & Found API', () => {
     expect([200,403,404]).toContain(res.statusCode);
   });
 
-  // Update item (by admin)
   it('should update item as admin', async () => {
     const res = await request(app)
       .put(`/items/${createdItemId}`)
@@ -119,7 +119,6 @@ describe('Lost & Found API', () => {
     expect([200,404]).toContain(res.statusCode);
   });
 
-  // Delete item (by admin)
   it('should delete item as admin', async () => {
     const res = await request(app)
       .delete(`/items/${createdItemId}`)
@@ -127,7 +126,6 @@ describe('Lost & Found API', () => {
     expect([200,404]).toContain(res.statusCode);
   });
 
-  // Delete item (by user, should fail)
   it('should not delete item as user', async () => {
     const res = await request(app)
       .delete(`/items/${createdItemId}`)

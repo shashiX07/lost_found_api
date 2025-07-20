@@ -43,7 +43,7 @@ const getItemById = async (id) => {
 const addItem = async (item) => {
   try {
     const result =
-      await sql`INSERT INTO items  (title, category, description, status, location, date, contact_info, image_url) VALUES (${item.title}, ${item.category}, ${item.description}, ${item.status}, ${item.location}, ${item.date}, ${item.contact_info}, ${item.image_url}) RETURNING *`;
+      await sql`INSERT INTO items  (title, user_id, category, description, status, location, date, contact_info, image_url) VALUES (${item.title}, ${item.user_id}, ${item.category}, ${item.description}, ${item.status}, ${item.location}, ${item.date}, ${item.contact_info}, ${item.image_url}) RETURNING *`;
     return result;
   } catch (error) {
     console.error("Error adding item:", error);
@@ -57,6 +57,7 @@ const UpdateItem = async (id, item) => {
       await sql`UPDATE items  SET title = ${item.title}, description = ${item.description}, status = ${item.status}, location = ${item.location}, date = ${item.date}, contact_info = ${item.contact_info}, image_url = ${item.image_url} WHERE id = ${id} RETURNING *`;
     return result;
   } catch (error) {
+    console.log("Error updating item:", error);
     return null;
   }
 };
