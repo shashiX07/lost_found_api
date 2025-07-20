@@ -20,6 +20,7 @@ const app = express();
 //setting up the middleware
 app.use(bodyParser.json());
 app.use(limiter);
+app.use(cors())
 
 //setting up the the router for the items 
 app.use("/items", itemRouter);
