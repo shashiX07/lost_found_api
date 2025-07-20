@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const rateLimit = require("express-rate-limit");
 const {itemRouter} = require("./routes/itemRouter");
 const {authRouter} = require("./routes/authRouter");
+const cors = require("cors");
 
 //configuring the express-rate-limiter
 const limiter = rateLimit({
