@@ -81,7 +81,7 @@ A RESTful API for managing lost and found items. This backend service allows use
 
 1. **Clone the repository**
    ```bash
-   git clone [your-github-repo-url]
+   git clone https://github.com/shashix07/lost_found_api
    cd lost-and-found-api
    ```
 
